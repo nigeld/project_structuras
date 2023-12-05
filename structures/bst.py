@@ -1,8 +1,8 @@
 class Node:
     def __init__(self, key):
+        self.val = key
         self.left = None
         self.right = None
-        self.val = key
 
 class BST:
     def __init__(self):
@@ -15,21 +15,11 @@ class BST:
         if root is None:
             return Node(key)
         else:
-            if root.val < key:
+            if root.val[0] < key[0]:
                 root.right = self._insert_recursive(root.right, key)
             else:
                 root.left = self._insert_recursive(root.left, key)
         return root
-    
-    def search(self, key):
-        return self._search_recursive(self.root, key)
-
-    def _search_recursive(self, root, key):
-        if root is None or root.val == key:
-            return root
-        if root.val < key:
-            return self._search_recursive(root.right, key)
-        return self._search_recursive(root.left, key)
 
     def inorder_traversal(self):
         self._inorder_recursive(self.root)
@@ -41,21 +31,12 @@ class BST:
             print(root.val, end=" ")
             self._inorder_recursive(root.right)
 
+    def search(self, key):
+        return self._search_recursive(self.root, key)
 
-# Ejemplo de uso:
-if __name__ == "__main__":
-    # Crear una instancia del BST
-    bst = BST()
-
-    # Insertar elementos en el BST
-    bst.insert([3, "Maria"])
-    bst.insert([1, "Daniel"])
-    bst.insert([2, "Jose"])
-    bst.insert([8, "Maria"])
-    bst.insert([0, "Maria"])
-    bst.insert([4, "Daniel"])
-    bst.insert([5, "Daniel"])
-
-    # Realizar un recorrido en orden (inorder traversal) para imprimir los elementos
-    print("Inorder Traversal:")
-    bst.inorder_traversal()
+    def _search_recursive(self, root, key):
+        if root is None or root.val[0] == key:
+            return root
+        if root.val[0] < key:
+            return self._search_recursive(root.right, key)
+        return self._search_recursive(root.left, key)

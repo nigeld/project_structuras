@@ -122,7 +122,6 @@ class AVLTree:
     def search(self, root, key):
         if root is None or root.key == key:
             return root
-
         if root.key < key:
             return self.search(root.right, key)
 
